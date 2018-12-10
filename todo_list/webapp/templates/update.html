@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать задачу задачу{% endblock %}
+{% block content %}
+    <form action="{% url 'task_edit' task.pk%}" method="post">
+        {% csrf_token %}
+        <label>Введите название</label><br>
+        <input type="text" name="name" value="{{ task.name }}"><br>
+            <label>Выбирите статус</label><br>
+                <select name="status">
+                    <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>В процессе</option>
+                    <option value="new" {% if task.status == 'new' %}selected{% endif %}>Новая</option>
+                    <option value="done" {% if task.status == 'done' %}selected{% endif %}>Выполнено</option>
+                </select><br>
+        <div class="submit_edit">
+            <input type="submit" value="Изменить">
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Задачи{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Задача</th>
+                <th>Готовность</th>
+                <th colspan="3">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{% if task.status == 'done' %}<s>{% endif %}{{ task.name }}{% if task.status == 'done' %}</s>{% endif %}</td>
+                    <td>{% if task.status == 'new' %}Новая{% elif task.status == 'in_progress' %}В процессе{% elif task.status == 'done' %}Выполнено{% endif %}</td>
+                    <td>{% if task.status == 'done' %}{% elif task.status != 'done' %}<a href="{% url 'task_complete' task.pk%}">Выполнить</a>{% endif %}</td>
+                    <td><a href="{% url 'task_delete' task.pk%}">Удалить</a></td>
+                    <td><a href="{% url 'task_edit' task.pk%}">Редактировать</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Добавить новую задачу</h1>
+    <form action="{% url 'task_create' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Надо сделать:" name="task_name">
+        <input type="submit" value="Добавить">
+    </form>
+    <p><a href="{% url 'delete_done' %}">Удалить все выполненные задачи</a></p>
+{% endblock %}

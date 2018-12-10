@@ -1,0 +1,38 @@
+a, a:visited {
+    color: inherit;
+}
+
+a:hover, a:active {
+  color: #ff8c33;
+}
+
+body {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #222222;
+    background-color: #ffffe7;
+}
+
+.container {
+    max-width: 80%;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}
+
+th, td {
+    border: solid 1px gray;
+    padding: 3px 5px;
+}
+
+.submit_edit {
+    margin-top: 20px;
+}
